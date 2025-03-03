@@ -13,7 +13,7 @@ const sendErrorResponse = (code: number, res: Response, message: string, errors:
     status: 'failed',
     message: message,
     errors: errors
-  });
+  }).end();
 };
 
-export {sendErrorResponse, sendSuccessResponse};
+export { sendErrorResponse, sendSuccessResponse };

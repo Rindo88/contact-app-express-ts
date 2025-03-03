@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import UserService from "../services/user-service";
 import { CreateUserRequest, LoginUserRequest } from "../models/user-model";
 import { sendSuccessResponse, sendErrorResponse } from "../utils/response-util";
+import { UserRequest } from "../types/user-request-type";
 
 class UserController {
   static async register(req: Request, res: Response, next: NextFunction) {
@@ -18,6 +19,15 @@ class UserController {
       const request: LoginUserRequest = req.body as LoginUserRequest;
       const response = await UserService.login(request);
       sendSuccessResponse(200, res, 'login successfully', response);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async get (req: UserRequest, res: Response, next: NextFunction) {
+    try {
+      const response = await UserService.get(req.user!);
+      sendSuccessResponse(200, res, 'successfully get user data', response);
     } catch (error) {
       next(error);
     }

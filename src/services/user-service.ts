@@ -1,10 +1,11 @@
+import { User } from "@prisma/client";
 import prisma from "../application/database";
 import ResponseError from "../errors/response-error";
 import { CreateUserRequest, LoginUserRequest, toUserResponse, UserResponse } from "../models/user-model";
 import UserValidation from "../validations/user-validation";
 import Validation from "../validations/validation";
 import bcrypt from 'bcrypt';
-import {v4 as uuidv4} from 'uuid';
+import {v4 as uuid} from 'uuid';
 
 class UserService {
   static async register(req: CreateUserRequest): Promise<UserResponse> {
@@ -44,12 +45,16 @@ class UserService {
         username: req.username
       },
       data: {
-        token: uuidv4()
+        token: uuid()
       }
     });
-    const response = toUserResponse(user);
+    const response = toUserResponse(updateUser);
     response.token = updateUser.token!;
     return response;
+  }
+
+  static async get (user: User): Promise<UserResponse> {
+    return toUserResponse(user);
   }
 }
 

@@ -28,7 +28,7 @@ describe('POST API Register', () => {
       .send({
         username: 'test',
         name: 'test',
-        password: 'test123'
+        password: 'test'
       });
 
     logger.debug(response.body);
@@ -55,7 +55,6 @@ describe('POST API Login', () => {
       });
 
     logger.debug(response.body);
-    console.log(response.body)
     expect(response.status).toBe(200);
     expect(response.body.data).toBeDefined();
   });
@@ -70,5 +69,34 @@ describe('POST API Login', () => {
 
     logger.debug(response.body);
     expect(response.status).toBe(401);
+  });
+});
+
+describe('GET API User', () => {
+  beforeEach(async () => {
+    await UserTest.addUser();
+  });
+
+  afterEach(async () => {
+    await UserTest.deleteUser();
+  });
+
+  it('should success get data user', async () => {
+    const loginResponse = await supertest(app)
+      .post('/api/users/login')
+      .send({
+        username: 'test',
+        password: 'test'
+      });
+
+    const token = loginResponse.body.data.token;
+
+    const response = await supertest(app)
+      .get('/api/users/current')
+      .set('ACCESS_TOKEN', token);
+
+    logger.debug(response.body);
+    expect(response.status).toBe(200);
+    expect(response.body.data).toBeDefined();
   });
 });

@@ -20,8 +20,8 @@ This is a Contact App built with Express and TypeScript. The application allows 
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/contactapp-express-ts.git
-cd contactapp-express-ts
+git clone https://github.com/Rindo88/contact-app-express-ts.git
+cd contact-app-express-ts
 ```
 
 2. Install dependencies:
