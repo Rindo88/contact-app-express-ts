@@ -1,23 +1,23 @@
 # Contact App Express TS
 
-This is a Contact App built with Express and TypeScript. The application allows users to register, login, and manage their contacts and addresses.
+Ini adalah aplikasi Kontak yang dibangun dengan Express dan TypeScript. Aplikasi ini memungkinkan pengguna untuk mendaftar, login, dan mengelola kontak serta alamat mereka.
 
-## Features
+## Fitur
 
-- User Registration
-- User Login
-- Create, Read, Update, Delete (CRUD) Contacts
-- Create, Read, Update, Delete (CRUD) Addresses
+- Pendaftaran Pengguna
+- Login Pengguna
+- Buat, Baca, Perbarui, Hapus (CRUD) Kontak
+- Buat, Baca, Perbarui, Hapus (CRUD) Alamat
 
-## Prerequisites
+## Prasyarat
 
 - Node.js
 - PostgreSQL
 - Prisma
 
-## Setup
+## Pengaturan
 
-1. Clone the repository:
+1. Clone repository:
 
 ```bash
 git clone https://github.com/Rindo88/contact-app-express-ts.git
@@ -30,48 +30,50 @@ cd contact-app-express-ts
 npm install
 ```
 
-3. Set up the database:
+3. Atur database:
 
-- Create a `.env` file in the root directory and add your database URL:
+- Buat file `.env` di direktori root dan tambahkan URL database Anda:
 
 ```env
 DATABASE_URL=postgresql://username:password@localhost:5432/contactapp
 ```
 
-- Run Prisma migrations:
+- Jalankan migrasi Prisma:
 
 ```bash
 npx prisma migrate dev
 ```
 
-4. Start the application:
+4. Mulai aplikasi:
 
 ```bash
 npm run dev
 ```
 
-## API Documentation
+## Dokumentasi API
 
 ### User API
 
-- [User API Specification](./docs/user.md)
+- [Spesifikasi User API](./docs/user.md)
 
 ### Contact API
 
-- [Contact API Specification](./docs/contact.md)
+- [Spesifikasi Contact API](./docs/contact.md)
 
 ### Address API
 
-- [Address API Specification](./docs/address.md)
+- [Spesifikasi Address API](./docs/address.md)
 
-## Running Tests
+## Menjalankan Tes
 
-To run the tests, use the following command:
+Untuk menjalankan tes, gunakan perintah berikut:
 
 ```bash
 npm test
 ```
 
-## License
+## Lisensi
 
-This project is licensed under the MIT License.
+Proyek ini dilisensikan di bawah Lisensi MIT.
+
+Anda dapat memperbarui README.md dengan konten di atas.
