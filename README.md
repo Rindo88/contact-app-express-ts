@@ -21,7 +21,7 @@ This is a Contact App built with Express and TypeScript. The application allows 
 
 ```bash
 git clone https://github.com/Rindo88/contact-app-express-ts.git
-cd contactapp-express-ts
+cd contact-app-express-ts
 ```
 
 2. Install dependencies:
