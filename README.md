@@ -44,7 +44,13 @@ DATABASE_URL=postgresql://username:password@localhost:5432/contactapp
 npx prisma migrate dev
 ```
 
-4. Mulai aplikasi:
+4. Compile aplikasi:
+
+```bash
+tsc
+```
+
+5. Mulai aplikasi  *Pastikan run pada file index yang ada pada folder dist*:
 
 ```bash
 npm run dev
