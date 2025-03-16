@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import UserService from "../services/user-service";
-import { CreateUserRequest, LoginUserRequest } from "../models/user-model";
+import { CreateUserRequest, LoginUserRequest, UpdateUserRequest } from "../models/user-model";
 import { sendSuccessResponse, sendErrorResponse } from "../utils/response-util";
 import { UserRequest } from "../types/user-request-type";
 
@@ -14,6 +14,7 @@ class UserController {
       next(error);
     }
   }
+
   static async login (req: Request, res: Response, next: NextFunction) {
     try {
       const request: LoginUserRequest = req.body as LoginUserRequest;
@@ -28,6 +29,25 @@ class UserController {
     try {
       const response = await UserService.get(req.user!);
       sendSuccessResponse(200, res, 'successfully get user data', response);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async update (req: UserRequest, res: Response, next: NextFunction) {
+    try {
+      const request: UpdateUserRequest = req.body as UpdateUserRequest;
+      const response = await UserService.update(req.user!, request);
+      sendSuccessResponse(200, res, 'successfully update user data', response);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async logout (req: UserRequest, res: Response, next: NextFunction) {
+    try {
+      const response = await UserService.logout(req.user!);
+      sendSuccessResponse(200, res, 'success logout', response);
     } catch (error) {
       next(error);
     }

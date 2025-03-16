@@ -12,6 +12,18 @@ type CreateUserRequest = {
   password: string;
 }
 
+
+type LoginUserRequest = {
+  username: string;
+  password: string;
+}
+
+type UpdateUserRequest = {
+  name?: string;
+  password?: string;
+}
+
+
 const toUserResponse = (user: User): UserResponse => {
   return {
     name: user.name,
@@ -19,10 +31,6 @@ const toUserResponse = (user: User): UserResponse => {
   }
 }
 
-type LoginUserRequest = {
-  username: string;
-  password: string;
-}
 
 export {toUserResponse};
-export type {UserResponse, CreateUserRequest, LoginUserRequest};
+export type {UserResponse, CreateUserRequest, LoginUserRequest, UpdateUserRequest};
