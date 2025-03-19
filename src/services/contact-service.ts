@@ -1,12 +1,13 @@
 import { User } from "@prisma/client";
-import { ContactCreateRequest, ContactResponse, ContactUpdateRequest, toContactResponse } from "../models/contact-model";
+import { ContactCreateRequest, ContactResponse, ContactUpdateRequest, SearchContactRequest, toContactResponse } from "../models/contact-model";
 import prisma from "../application/database";
 import Validation from "../validations/validation";
 import ContactValidation from "../validations/contact-validation";
 import ResponseError from "../errors/response-error";
+import { Pageable } from "../models/paging-model";
 
 class ContactService {
-  private static async checkContactExists (username: string, id: number) {
+  public static async checkContactExists (username: string, id: number) {
     const contact = await prisma.contact.findUnique({
       where: {
         id,
@@ -66,6 +67,70 @@ class ContactService {
     });
     
     return toContactResponse(deleteContact);
+  }
+
+  static async search (user: User, req: SearchContactRequest): Promise<Pageable<ContactResponse>> {
+    const request = Validation.validate(ContactValidation.SEARCH, req);
+    const skip = (request.page -1) * request.size;
+    const filters = [];
+
+    if(request.name) {
+      filters.push({
+        OR: [
+          {
+            first_name: {
+              contains: request.name
+            }
+          },
+          {
+            last_name: {
+              contains: request.name
+            }
+          }
+        ]
+      });
+    }
+
+    if(request.email) {
+      filters.push({
+        email: {
+          contains: request.email
+        }
+      });
+    }
+
+    if(request.phone) {
+      filters.push({
+        phone: {
+          contains: request.phone
+        }
+      });
+    }
+
+    const contacts = await prisma.contact.findMany({
+      where: {
+        username: user.username,
+        AND: filters
+      },
+      take: req.size,
+      skip: skip
+    });
+
+    const total = await prisma.contact.count({
+      where: {
+        username: user.username,
+        OR: filters
+      }
+    });
+
+    return {
+      data: contacts.map(contact => toContactResponse(contact)),
+      paging: {
+        current_page: request.page,
+        total_page: Math.ceil(total / request.size),
+        size: request.size
+      }
+    }
   }
 }
 

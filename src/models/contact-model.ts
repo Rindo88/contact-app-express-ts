@@ -23,6 +23,14 @@ interface ContactUpdateRequest {
   phone?: string;
 }
 
+interface SearchContactRequest {
+  name?: string;
+  email?: string;
+  phone?: string;
+  page: number;
+  size: number;
+}
+
 
 const toContactResponse = (contact: Contact): ContactResponse => {
   return {
@@ -35,5 +43,5 @@ const toContactResponse = (contact: Contact): ContactResponse => {
 }
 
 
-export type {ContactCreateRequest, ContactResponse, ContactUpdateRequest}
+export type {ContactCreateRequest, ContactResponse, ContactUpdateRequest, SearchContactRequest}
 export {toContactResponse}
