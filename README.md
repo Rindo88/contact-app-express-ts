@@ -70,14 +70,6 @@ npm run dev
 
 - [Spesifikasi Address API](./docs/address.md)
 
-## Menjalankan Tes
-
-Untuk menjalankan tes, gunakan perintah berikut:
-
-```bash
-npm test
-```
-
 ## Lisensi
 
 Proyek ini dilisensikan di bawah Lisensi MIT.
