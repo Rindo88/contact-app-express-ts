@@ -73,5 +73,3 @@ npm run dev
 ## Lisensi
 
 Proyek ini dilisensikan di bawah Lisensi MIT.
-
-Anda dapat memperbarui README.md dengan konten di atas.
